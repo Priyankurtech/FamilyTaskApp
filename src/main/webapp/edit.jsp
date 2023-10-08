@@ -19,7 +19,7 @@
 		<h1>Edit Task</h1>
 		<%int id=Integer.parseInt(request.getParameter("id"));
 		
-		System.out.println(id);
+		
 		%>
 		<form action="edittask" method="post">
 		    <input type="hidden" value="<%=id%>" name="taskid">
