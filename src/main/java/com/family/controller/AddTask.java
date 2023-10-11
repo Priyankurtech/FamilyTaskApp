@@ -16,38 +16,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.family.dao.CalendarEventApp;
 import com.family.dao.TaskDao;
+import com.family.dto.AddTaskEvent;
+import com.family.dto.CalendarTask;
 @WebServlet("/addtask")
 public class AddTask extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		try {
+		
 			
 			String taskname = req.getParameter("taskname");
 			String taskdescription = req.getParameter("taskdes");
 			LocalDateTime start_date =LocalDateTime.parse(req.getParameter("startdate")) ;
 			LocalDateTime end_date = LocalDateTime.parse(req.getParameter("enddate"));
-			TaskDao dao = new TaskDao();
-			Connection con = dao.connect_to_database();
-			Statement statement = con.createStatement();
-			String query = String.format("insert into familyevent(task_name,task_details,status,event_start_date,event_end_date) values('%s','%s','%s','%s','%s');",
-					taskname, taskdescription, "not done",start_date,end_date);
-			statement.executeUpdate(query);
+			AddTaskEvent addTaskEvent=new AddTaskEvent();
+			addTaskEvent.setTaskname(taskname);
+			addTaskEvent.setTaskdes(taskdescription);
+			addTaskEvent.setStartdate(start_date);
+			addTaskEvent.setEnddate(end_date);
+			TaskDao dao=new TaskDao();
+			CalendarTask calendar=new CalendarTask();
 			String sd=req.getParameter("startdate");
-			String ed=req.getParameter("enddate");
+      		String ed=req.getParameter("enddate");
+			calendar.setTaskname(taskname);
+			calendar.setTaskdes(taskdescription);
+			calendar.setStartdate(sd);
+			calendar.setEnddate(ed);
 			CalendarEventApp app=new CalendarEventApp();
-			app.setNewEvent( taskname, taskdescription,sd,ed);
+			try {
+				dao.addtask(addTaskEvent);
+				app.setNewEvent(calendar);
+			} catch (ClassNotFoundException | SQLException | GeneralSecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			
+			
 			resp.getWriter().print("<h1>Task Added</h1>");
 			req.getRequestDispatcher("alltask.jsp").include(req, resp);
-		} catch (SQLException | ClassNotFoundException e) {
-
-			e.printStackTrace();
-		} catch (GeneralSecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 	}
 	

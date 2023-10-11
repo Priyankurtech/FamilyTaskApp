@@ -1,5 +1,7 @@
+<%@page import="com.family.dto.AddTaskEvent"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="com.family.*"%>
+<%@page import="com.family.dto.*"%>
 <%@page import="com.family.dao.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -15,14 +17,21 @@
 <link rel="stylesheet" href="alltask.css">
 </head>
 <body>
-	<form method="post">
-		<h1 class="welcome">Welcome to FamilyTask</h1>
+	   <div id="navbar-container"></div>
+<script>
+    // Fetch and include the navbar HTML
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('navbar-container').innerHTML = html;
+        });
+</script>
+	   
+		<h2 class="welcome">Welcome to FamilyTask</h2>
 		<%
-		TaskDao dao = new TaskDao();
-		String query = "select * from familyevent";
-		Connection con = dao.connect_to_database();
-		Statement statement = con.createStatement();
-		ResultSet resultSet = statement.executeQuery(query);
+		TaskDao dao=new TaskDao();
+		request.setAttribute("alltask",dao.getAllTask() );
+		  List<TaskEventShow> task1= (List<TaskEventShow>)request.getAttribute("alltask");
 		%>
 		<table class="styled-table">
 
@@ -37,32 +46,25 @@
 				<th>Delete Task</th>
 			</tr>
 			<%
-			while (resultSet.next()) {
-				int taskid=resultSet.getInt("taskid");
-				String taskname = resultSet.getString("task_name");
-				String taskd = resultSet.getString("task_details");
-				String status = resultSet.getString("status");
-				Date startdate =resultSet.getDate("event_start_date") ;
-				Date enddate =resultSet.getDate("event_end_date");
+			for(TaskEventShow event:task1){
 			%>
 			<tr class="active-row">
-				<td><%=taskname%></td>
-				<td><%=taskd%></td>
-				<td><%=status%></td>
-				<td><%=startdate%></td>
-				<td><%=enddate%></td>
-				
-				<td><a href="edit.jsp?id=<%=taskid%>"><button type="button" class="btn">edit</button></a></td>
-				<td><a href="editstatus?id=<%=taskid%>"><button type="button" class="btn">done</button></a></td>
-				<td><a href="deletestatus?id=<%=taskid%>"><button type="button" class="btn">delete</button></a></td>
+				<td><%=event.getTaskname()%></td>
+				<td><%=event.getTaskdes()%></td>
+				<td><%=event.getTstatus()%></td>
+				<td><%=event.getStartdate()%></td>
+				<td><%=event.getEnddate()%></td>
+				<td><a href="edit.jsp?id=<%=event.getTaskid()%>"><button type="button" class="btn">edit</button></a></td>
+				<td><a href="editstatus?id=<%=event.getTaskid()%>"><button type="button" class="btn">done</button></a></td>
+				<td><a href="deletestatus?id=<%=event.getTaskid()%>"><button type="button" class="btn">delete</button></a></td>
 
 			</tr>
 			<%
 			}
 			%>
 		</table>
-<a href="addtask.jsp"> <button id="btnn" type="button">AddTask</button> </a>
 
-	</form>
+
+	
 </body>
 </html>

@@ -1,5 +1,6 @@
-package com.family.controller;
+package com.family.dao;
 
+import com.family.dto.CalendarTask;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -100,11 +101,13 @@ public class CalendarEventApp {
         }
 
     }
- public void setNewEvent(String summary,String description,String startDateTimeP,String endDateTimeP) throws IOException, GeneralSecurityException {
-        
-
-    	System.out.println(startDateTimeP);
-    	System.out.println(endDateTimeP);
+ public void setNewEvent(CalendarTask cal) throws IOException, GeneralSecurityException {
+        String summary=cal.getTaskname();
+        String description=cal.getTaskdes();
+        String startDateTimeP=cal.getStartdate();
+        String endDateTimeP=cal.getEnddate();
+    
+    	
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, refreshExpiredToken(getCredentials(HTTP_TRANSPORT)))
                 .setApplicationName(APPLICATION_NAME).build();
@@ -116,7 +119,7 @@ public class CalendarEventApp {
         
         
         //2015-05-28T09:00:00-07:00
-        DateTime startDateTime = new DateTime(startDateTimeP+":00-07:00");
+        DateTime startDateTime = new DateTime(startDateTimeP+":00+05:30");
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone("Asia/Kolkata");
@@ -124,7 +127,7 @@ public class CalendarEventApp {
         
         
 
-        DateTime endDateTime = new DateTime(endDateTimeP+":00-07:00");
+        DateTime endDateTime = new DateTime(endDateTimeP+":00+05:30");
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
                 .setTimeZone("Asia/Kolkata");
