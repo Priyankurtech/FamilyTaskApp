@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 
 import lombok.Data;
 @Data
-public class Calendar {
+public class AddTaskEvent {
+	
     String taskname;
     String taskdes;
+    String tstatus;
     LocalDateTime startdate;
     LocalDateTime enddate;
 }

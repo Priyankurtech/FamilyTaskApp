@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="addtask.css">
 </head>
 <body>
+
 	<div class="center">
 		<h1>Add Task</h1>
 		<form action="addtask" method="post">

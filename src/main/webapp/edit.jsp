@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="edit.css">
 </head>
 <body>
+
 	<div class="center">
 		<h1>Edit Task</h1>
 		<%int id=Integer.parseInt(request.getParameter("id"));

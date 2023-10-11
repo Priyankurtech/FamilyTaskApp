@@ -1,5 +1,5 @@
 @charset "ISO-8859-1";
-*{
+/**{
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
@@ -65,19 +65,106 @@
 #btnn:hover {
       background-color:#002ead;
       transition: 0.7s;
-  }
-  .welcome {
-    
-    background-color:#0a0a23;
+  }*/
+  /* Add this to your styles.css file */
+  * {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 0;
+    text-align: center; /* Center the content within the cells */
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.btn {
+    background-color: #0a0a23;
     color: #fff;
-    border:none; 
-    border-radius:10px; 
-    padding:15px;
-    min-height:30px; 
-    min-width: 12em;
-    margin: 25px 600px;
-  }
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 30px;
+    width: 120px;
+}
+
+.btn:hover {
+    background-color: #002ead;
+    transition: 0.7s;
+}
+
+#btnn {
+    background-color: #0a0a23;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 30px;
+    width: 120px;
+    margin: 10px 0;
+}
+
+#btnn:hover {
+    background-color: #002ead;
+    transition: 0.7s;
+}
+
+.welcome {
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    background-color: #3498db; /* Background color */
+    padding: 10px;
+    margin-top: 20px;
+    opacity: 0; /* Initial opacity for fade-in effect */
+    animation: fadeIn 1.5s ease-out forwards; /* Animation */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
 .welcome:hover {
-      background-color:cornflowerblue;
-      transition: 1s;
-  }
+    background-color: rgb(128, 128, 255); /* Hover background color */
+}
+
+/* Keyframes for the fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+

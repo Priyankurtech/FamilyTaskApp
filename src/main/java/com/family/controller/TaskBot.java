@@ -97,10 +97,7 @@ public class TaskBot extends TelegramLongPollingBot{
 		        throw new RuntimeException(e);      //Any error will be printed here
 		   }
 		}
-	public static void main(String[] args) throws TelegramApiException {
-		TelegramBotsApi api=new TelegramBotsApi(DefaultBotSession.class);
-		api.registerBot(new TaskBot());
-	}
+	
 	}
 
 
