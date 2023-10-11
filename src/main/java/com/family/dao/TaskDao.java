@@ -48,8 +48,9 @@ public class TaskDao {
 
 	public void create_table(Connection con, String tablename) throws SQLException {
 		Statement statement = con.createStatement();
-		String query = "create table " + tablename
-				+ "(taskid SERIAL,task_name varchar(50),task_details varchar(200),status varchar(50),event_start_date TIMESTAMP NOT NULL,event_end_date TIMESTAMP NOT NULL, primary key (taskid))";
+		//String query = "create table " + tablename
+		//		+ "(taskid SERIAL,task_name varchar(50),task_details varchar(200),status varchar(50),event_start_date TIMESTAMP NOT NULL,event_end_date TIMESTAMP NOT NULL, primary key (taskid))";
+		String query = "create table " + tablename+ "(item_id SERIAL,item_name varchar(50),quantity varchar(10),status varchar(10),primary key (item_id))";
 		statement.executeUpdate(query);
 	}
 

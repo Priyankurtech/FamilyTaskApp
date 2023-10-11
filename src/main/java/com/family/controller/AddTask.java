@@ -1,21 +1,14 @@
 package com.family.controller;
 
 import java.io.IOException;
-
 import java.security.GeneralSecurityException;
-import java.sql.Connection;
-
 import java.sql.SQLException;
-import java.sql.Statement;
-
 import java.time.LocalDateTime;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.family.dao.CalendarEventApp;
 import com.family.dao.TaskDao;
 import com.family.dto.AddTaskEvent;

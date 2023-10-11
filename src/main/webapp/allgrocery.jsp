@@ -30,34 +30,30 @@
 	   
 		<h2 class="welcome">Welcome to FamilyTask</h2>
 		<%
-		TaskDao dao=new TaskDao();
-		request.setAttribute("alltask",dao.getAllTask() );
-		  List<TaskEventShow> task1= (List<TaskEventShow>)request.getAttribute("alltask");
+		GroceryDao dao=new GroceryDao();
+		request.setAttribute("allgrocery",dao.getAllGrocery() );
+		  List<Grocery> gro= (List<Grocery>)request.getAttribute("allgrocery");
 		%>
 		<table class="styled-table">
 
 			<tr>
-				<th>Task Name</th>
-				<th>Task Description</th>
-				<th>Task Status</th>
-				<th>Event Start Date</th>
-				<th>Event End date</th>
-				<th>Edit Task Description</th>
+				<th>Grocery Name</th>
+				<th>Quantity</th>
+				<th>Status</th>
+				<th>Edit Grocery Description</th>
 				<th>Change Status</th>
 				<th>Delete Task</th>
 			</tr>
 			<%
-			for(TaskEventShow event:task1){
+			for( Grocery event:gro){
 			%>
 			<tr class="active-row">
-				<td><%=event.getTaskname()%></td>
-				<td><%=event.getTaskdes()%></td>
-				<td><%=event.getTstatus()%></td>
-				<td><%=event.getStartdate()%></td>
-				<td><%=event.getEnddate()%></td>
-				<td><a href="edit.jsp?id=<%=event.getTaskid()%>"><button type="button" class="btn">edit</button></a></td>
-				<td><a href="editstatus?id=<%=event.getTaskid()%>"><button type="button" class="btn">done</button></a></td>
-				<td><a href="deletestatus?id=<%=event.getTaskid()%>"><button type="button" class="btn">delete</button></a></td>
+				<td><%=event.getGroceryName()%></td>
+				<td><%=event.getQuantity()%></td>
+				<td><%=event.getStatus()%></td>
+				<td><a href="edit.jsp?id=<%=event.getGroceryid()%>"><button type="button" class="btn">edit</button></a></td>
+				<td><a href="editstatus?id=<%=event.getGroceryid()%>"><button type="button" class="btn">done</button></a></td>
+				<td><a href="deletestatus?id=<%=event.getGroceryid()%>"><button type="button" class="btn">delete</button></a></td>
 
 			</tr>
 			<%
